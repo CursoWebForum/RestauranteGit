@@ -13,6 +13,7 @@ public class ConexionRestaurante {
     private final static Logger log = Logger.getLogger(ConexionRestaurante.class);
 
     public static Connection conexionRestaurante() throws ClassNotFoundException, SQLException {
+        
         BasicConfigurator.configure();
         String classname = "com.mysql.jdbc.Driver";
         String url = "jdbc:mysql://localhost/resturante";
@@ -22,11 +23,11 @@ public class ConexionRestaurante {
         Class.forName(classname);
         conexion = DriverManager.getConnection(url, user, password);
      
-        log.info("------Estoy pasando por aqui-----");
+       
         if (conexion != null) {
 
             //System.out.println("Conexion establecida");
-        log.debug("Conexion establecida"+conexion);
+        log.debug("Conexion establecida"+conexion.getClientInfo());
         } else {
 
             log.error("---Se ha producido un error en la conexion---");
@@ -39,7 +40,7 @@ public class ConexionRestaurante {
 
         if (conexion != null) {
             conexion.close();
-            log.debug("conexion cerrada satisfactoriamente");
+           
         } else {
             
            log.error("Se ha producido un error en la conexion");

@@ -53,7 +53,7 @@ public class DaoCamarero {
     public static void actualizarCamarero(String nombre, String apellido, String idcamarero) throws ClassNotFoundException, SQLException {
 
         Connection conexion = ConexionRestaurante.conexionRestaurante();
-        String sql = "update camarero set nombre=? , apellido=? where idcamarero=?";
+        String sql = "update camarero set nombre=?,apellido=? where idcamarero=?";
         PreparedStatement actualizar = conexion.prepareStatement(sql);
         actualizar.setString(1, nombre);
         actualizar.setString(2, apellido);

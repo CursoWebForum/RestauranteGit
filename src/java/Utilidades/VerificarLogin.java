@@ -29,12 +29,13 @@ public class VerificarLogin {
         String sql = "select * from logeados where usuario='" + usuario + "' AND password='" + password + "'";
         Connection con = ConexionRestaurante.conexionRestaurante();
         PreparedStatement comprobarLogin = con.prepareStatement(sql);
-        logVerificarLogin.debug("Consulta ejecutada con exito"+comprobarLogin);
+        
         ResultSet rs = comprobarLogin.executeQuery(sql);
         
         if (rs.next()) {
             // si devuelve resultados el login es correcto 
             nRegistro = true;
+            ConexionRestaurante.cerrarConexion();
 
         }
 

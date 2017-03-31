@@ -27,11 +27,11 @@ public class ControladorServletCamarero extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         
         //Ejemplo Nuestro configurador básico
-               // BasicConfigurator.configure();
-		//org.apache.log4j.Logger logs = org.apache.log4j.Logger.getLogger("Logger de Ejemplo");
+        // BasicConfigurator.configure();
+//org.apache.log4j.Logger logs = org.apache.log4j.Logger.getLogger("Logger de Ejemplo");
 		
 		
-        //Estamos comprobando si el usuario esta logeado
+       
         HttpSession misession = (HttpSession) request.getSession();
        // logs.info("Recupero la sesion");
         boolean log = (boolean) misession.getAttribute("ok");
@@ -41,10 +41,11 @@ public class ControladorServletCamarero extends HttpServlet {
         if (log == true) {
 
             //recupera el action del formulario
-            if (action.contains("update")) {
+            if (action.contains("actualizar")) {
 
                 BoCamarero.procesarPeticionUpdateCamareroById(request, response);
-                 /*RequestDispatcher rs=request.getRequestDispatcher("pagina.jsp");
+                response.sendRedirect("/mostrarCamarero.jsp");
+                 /*RequestDispatcher rs=request.getRequestDispatcher("mostrarCamarero.jsp");
                  rs.forward(request, response);*/
             }
             if (action.contains("insertar")) {
@@ -53,6 +54,7 @@ public class ControladorServletCamarero extends HttpServlet {
                
                 response.sendRedirect("/RestauranteGit/altas.htm");
             }
+            
             if (action.contains("borrar")) {
                 BoCamarero.procesarPeticionBorrarCamareroById(request, response);
                 response.sendRedirect("/RestauranteGit/mostrarServletCamarero");

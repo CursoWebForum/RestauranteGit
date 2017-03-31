@@ -33,16 +33,17 @@ public class LogRestaurante extends HttpServlet {
         String user_login = request.getParameter("login_usuario");
         String pass_login = request.getParameter("login_password");
         
-        logRestaurante.debug("Recibendo parametros: "+user_login+"..."+pass_login);
+        
         
         boolean verificarUsuario = VerificarLogin.comprobarLogin(user_login, pass_login);
+        
 
         if (verificarUsuario == true) {
                
 
             HttpSession sesion_login = request.getSession();
             
-            logRestaurante.debug("Sesion Creada: "+sesion_login);
+            logRestaurante.debug("Sesion Creada: "+sesion_login.isNew());
             
             sesion_login.setAttribute("login_usuario", user_login);
             sesion_login.setAttribute("login_password", pass_login);
