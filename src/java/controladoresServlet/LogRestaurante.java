@@ -23,7 +23,7 @@ import org.apache.log4j.BasicConfigurator;
 @WebServlet(name = "LogRestaurante", urlPatterns = {"/logRestaurante"})
 public class LogRestaurante extends HttpServlet {
 
-    private final static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(LogRestaurante.class);
+    private final static org.apache.log4j.Logger logRestaurante = org.apache.log4j.Logger.getLogger(LogRestaurante.class);
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
@@ -33,7 +33,7 @@ public class LogRestaurante extends HttpServlet {
         String user_login = request.getParameter("login_usuario");
         String pass_login = request.getParameter("login_password");
         
-        log.debug("Recibendo parametros: "+user_login+"..."+pass_login);
+        logRestaurante.debug("Recibendo parametros: "+user_login+"..."+pass_login);
         
         boolean verificarUsuario = VerificarLogin.comprobarLogin(user_login, pass_login);
 
@@ -42,7 +42,7 @@ public class LogRestaurante extends HttpServlet {
 
             HttpSession sesion_login = request.getSession();
             
-            log.debug("Sesion Creada: "+sesion_login);
+            logRestaurante.debug("Sesion Creada: "+sesion_login);
             
             sesion_login.setAttribute("login_usuario", user_login);
             sesion_login.setAttribute("login_password", pass_login);

@@ -29,7 +29,7 @@ public class ConexionRestaurante {
         log.debug("Conexion establecida"+conexion);
         } else {
 
-            System.out.println("Conexion abortada");
+            log.error("---Se ha producido un error en la conexion---");
             
         }
         return conexion;
@@ -39,9 +39,11 @@ public class ConexionRestaurante {
 
         if (conexion != null) {
             conexion.close();
-            System.out.println("Conexion Cerrada");
+            log.debug("conexion cerrada satisfactoriamente");
         } else {
-            System.out.println("Se ha producido un error");
+            
+           log.error("Se ha producido un error en la conexion");
+            
         }
 
     }

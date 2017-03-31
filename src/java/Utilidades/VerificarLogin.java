@@ -5,38 +5,41 @@
  */
 package Utilidades;
 
+import controladoresServlet.LogRestaurante;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import org.apache.log4j.BasicConfigurator;
 
 /**
  *
  * @author martaperal
  */
 public class VerificarLogin {
-    
-    public static boolean comprobarLogin(String usuario,String password) throws ClassNotFoundException, SQLException{
-       
-      //esta variable no hace nada
-       
+
+    private final static org.apache.log4j.Logger logVerificarLogin = org.apache.log4j.Logger.getLogger(VerificarLogin.class);
+
+    public static boolean comprobarLogin(String usuario, String password) throws ClassNotFoundException, SQLException {
+
+        BasicConfigurator.configure();
+
         boolean nRegistro = false;
-        String sql="select * from logeados where usuario='"+usuario+"' AND password='"+password+"'";
-        Connection con=ConexionRestaurante.conexionRestaurante();
-        PreparedStatement comprobarLogin=con.prepareStatement(sql);
+        String sql = "select * from logeados where usuario='" + usuario + "' AND password='" + password + "'";
+        Connection con = ConexionRestaurante.conexionRestaurante();
+        PreparedStatement comprobarLogin = con.prepareStatement(sql);
+        logVerificarLogin.debug("Consulta ejecutada con exito"+comprobarLogin);
+        ResultSet rs = comprobarLogin.executeQuery(sql);
         
-        ResultSet rs=comprobarLogin.executeQuery(sql);
-       
-       if(rs.next()){
-          // si devuelve resultados el login es correcto 
-          nRegistro=true;
-          
-       }
-        
+        if (rs.next()) {
+            // si devuelve resultados el login es correcto 
+            nRegistro = true;
+
+        }
+
         return nRegistro;
-        
-    }   
-    
+
+    }
+
 }
-        
