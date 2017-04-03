@@ -23,9 +23,9 @@ public class BoCamarero {
     public static void procesarPeticionUpdateCamareroById(HttpServletRequest request,HttpServletResponse response) throws ClassNotFoundException, SQLException, IOException{
         
     Camarero camarero=new Camarero();
-    camarero.setIdCamarero(request.getParameter("idcamarero"));
     camarero.setNombre(request.getParameter("nombre"));
     camarero.setApellido(request.getParameter("apellido"));
+    camarero.setIdCamarero(Integer.parseInt(request.getParameter("idcamarero")));
     DaoCamarero.actualizarCamarero(camarero.getNombre(),camarero.getApellido(),camarero.getIdCamarero());
     //pendiente devolver a la vista  para mostrar el resultado 
     
@@ -34,7 +34,7 @@ public class BoCamarero {
     public static void procesarPeticionInsertarCamarero(HttpServletRequest request,HttpServletResponse response) throws SQLException, ClassNotFoundException, IOException{
     //orientacion a objetos
     Camarero camarero=new Camarero();
-    camarero.setIdCamarero(request.getParameter("idcamarero"));
+    camarero.setIdCamarero(Integer.parseInt(request.getParameter("idcamarero")));
     camarero.setNombre(request.getParameter("nombre"));
     camarero.setApellido(request.getParameter("apellido"));
     DaoCamarero.insertarCamarero(camarero.getIdCamarero(), camarero.getNombre(), camarero.getApellido());
@@ -46,7 +46,7 @@ public class BoCamarero {
 }
     public static void procesarPeticionBorrarCamareroById(HttpServletRequest request,HttpServletResponse response) throws ClassNotFoundException, SQLException, IOException{
         Camarero camarero=new Camarero();
-        camarero.setIdCamarero(request.getParameter("idcamarero"));
+        camarero.setIdCamarero(Integer.parseInt(request.getParameter("idcamarero")));
         //llamamos al DAO y a su metodo
         DaoCamarero.borrarCamareroId(camarero.getIdCamarero());
         //Desde el controlador dirigimos a la vista 

@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 //CRUD
 public class DaoCamarero {
 //+ he añadido nuestro propio control de excepciones
-    public static void insertarCamarero(String idCamarero, String nombre, String apellido) throws ExcepcionesBD {
+    public static void insertarCamarero(int idCamarero, String nombre, String apellido) throws ExcepcionesBD {
 
         try {
             Connection conexion = ConexionRestaurante.conexionRestaurante();
@@ -50,14 +50,11 @@ public class DaoCamarero {
 
     }
 
-    public static void actualizarCamarero(String nombre, String apellido, String idcamarero) throws ClassNotFoundException, SQLException {
+    public static void actualizarCamarero(String nombre, String apellido, int idcamarero) throws ClassNotFoundException, SQLException {
 
         Connection conexion = ConexionRestaurante.conexionRestaurante();
-        String sql = "update camarero set nombre=?,apellido=? where idcamarero=?";
-        PreparedStatement actualizar = conexion.prepareStatement(sql);
-        actualizar.setString(1, nombre);
-        actualizar.setString(2, apellido);
-        actualizar.setString(3, idcamarero);
+        String sql = "update camarero SET nombre='"+nombre+"',apellido='"+apellido+"' WHERE idcamarero='"+idcamarero+"'";
+        Statement actualizar = conexion.prepareStatement(sql);
         int filas = actualizar.executeUpdate(sql);
         System.out.println("N filas afectadas " + filas);
         actualizar.close();
@@ -77,7 +74,7 @@ public class DaoCamarero {
         ArrayList<Camarero> lista_camareros = new ArrayList<Camarero>();
         try {
             while (rs.next()) {
-                lista_camareros.add(new Camarero(rs.getString("idcamarero"),
+                lista_camareros.add(new Camarero(Integer.parseInt(rs.getString("idcamarero")),
                         rs.getString("nombre"),
                         rs.getString("apellido")));
             }
@@ -89,7 +86,7 @@ public class DaoCamarero {
     }
 //  + nuevo metodo
 
-    public static void borrarCamareroId(String idcamarero) throws ClassNotFoundException, SQLException {
+    public static void borrarCamareroId(int idcamarero) throws ClassNotFoundException, SQLException {
         Connection conexion = ConexionRestaurante.conexionRestaurante();
         String consultaSQL = "delete from camarero where idcamarero='" + idcamarero + "'";
         Statement sentencia = conexion.prepareStatement(consultaSQL);
@@ -111,7 +108,7 @@ public class DaoCamarero {
         ResultSet rs = sentencia.executeQuery(sql);
         ArrayList<Camarero> lista_camareros = new ArrayList<Camarero>();
         while (rs.next()) {
-            lista_camareros.add(new Camarero(rs.getString("idcamarero"),
+            lista_camareros.add(new Camarero(Integer.parseInt(rs.getString("idcamarero")),
                     rs.getString("nombre"),
                     rs.getString("apellido")));
         }
