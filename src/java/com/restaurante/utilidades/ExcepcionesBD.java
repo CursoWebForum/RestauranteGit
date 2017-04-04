@@ -23,8 +23,8 @@ public class ExcepcionesBD extends RuntimeException {
         super(mensaje);
     }
 
-    public ExcepcionesBD(Throwable mensaje) {
-        super(mensaje);
+    public ExcepcionesBD(Throwable causa) {
+        super(causa);
     }
 
 }

@@ -17,6 +17,7 @@ public class PruebasLog {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         
         ConexionRestaurante.conexionRestaurante();
+        ConexionRestaurante.cerrarConexion();
         
     }
     

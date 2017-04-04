@@ -69,7 +69,7 @@ public class DaoCamarero {
             log.error("Clase no encontrada" + e.getMessage());
             throw new ExcepcionesBD("Clase no encontrada");
         } catch (SQLException e) {
-           log.error("Excepción de Sql", e.getCause());
+            log.error("Excepción de Sql", e.getCause());
             throw new ExcepcionesBD("Se ha producido una excepción del tipo:" +e.getErrorCode());
         }
 
