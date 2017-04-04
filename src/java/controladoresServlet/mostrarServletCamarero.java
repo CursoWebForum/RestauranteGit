@@ -1,8 +1,8 @@
 
 package controladoresServlet;
 
-import Utilidades.ConexionRestaurante;
-import Utilidades.ExcepcionesBD;
+import com.restaurante.utilidades.ConexionRestaurante;
+import com.restaurante.utilidades.ExcepcionesBD;
 import dao.camarero.restaurante.DaoCamarero;
 import entidades.Camarero;
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class mostrarServletCamarero extends HttpServlet {
             //ResultSet rs =DaoCamarero.verCamareros();
             
             ArrayList<Camarero> list_camarero=new ArrayList<Camarero>();
-            list_camarero=(ArrayList<Camarero>) DaoCamarero.buscarTodos();
+            list_camarero=(ArrayList<Camarero>) DaoCamarero.listarCamareros();
            //Comienza la respuesta
           response.setContentType("text/html;charset=UTF-8");
         //Queda pendiente hacerlo pero con objetos

@@ -5,8 +5,9 @@
  */
 package dao.camarero.restaurante;
 
-import Utilidades.ConexionRestaurante;
-import Utilidades.ExcepcionesBD;
+import com.restaurante.utilidades.ConexionRestaurante;
+import com.restaurante.utilidades.ExcepcionesBD;
+import controladoresServlet.ControladorServletCamarero;
 import entidades.Camarero;
 import java.io.IOException;
 import java.sql.Connection;
@@ -26,9 +27,14 @@ import javax.servlet.http.HttpServletResponse;
  * @author martaperal
  */
 //CRUD
+////+ he añadido nuestro propio control de excepciones
 public class DaoCamarero {
-//+ he añadido nuestro propio control de excepciones
-    public static void insertarCamarero(int idCamarero, String nombre, String apellido) throws ExcepcionesBD {
+    
+    private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(DaoCamarero.class
+			.getPackage().getName());
+
+    
+    /* public static void insertarCamareroCopy(int idCamarero, String nombre, String apellido) throws ExcepcionesBD {
 
         try {
             Connection conexion = ConexionRestaurante.conexionRestaurante();
@@ -40,12 +46,31 @@ public class DaoCamarero {
             sentencia.close();
             ConexionRestaurante.cerrarConexion();
         } catch (ClassNotFoundException e) {
-            System.out.println("Clase no encontrada" + e.getMessage());
-            //Con esta excepcion mostramos al usuario nuestro propio mensaje
+            log.error("Clase no encontrada" + e.getMessage());
             throw new ExcepcionesBD("Clase no encontrada");
         } catch (SQLException e) {
-            System.out.println("Clase no encontrada" + e.getMessage());
+           log.error("Excepción de Sql", e.getCause());
+            throw new ExcepcionesBD("Se ha producido una excepción del tipo:" +e.getErrorCode());
+        }
+
+    }*/
+    public static void insertarCamarero(int idCamarero, String nombre, String apellido) throws ExcepcionesBD {
+
+        try {
+            Connection conexion = ConexionRestaurante.conexionRestaurante();
+            Statement sentencia = conexion.createStatement();
+            String consultaSQL = "insert into camarero (idcamarero,nombre,apellido) values ";
+            consultaSQL += "('" + idCamarero + "','" + nombre + "','" + apellido + "')";
+            int filas = sentencia.executeUpdate(consultaSQL);
+            log.info("Numero de Filas insertadas" + filas);
+            sentencia.close();
+            ConexionRestaurante.cerrarConexion();
+        } catch (ClassNotFoundException e) {
+            log.error("Clase no encontrada" + e.getMessage());
             throw new ExcepcionesBD("Clase no encontrada");
+        } catch (SQLException e) {
+           log.error("Excepción de Sql", e.getCause());
+            throw new ExcepcionesBD("Se ha producido una excepción del tipo:" +e.getErrorCode());
         }
 
     }
@@ -64,7 +89,7 @@ public class DaoCamarero {
 
     //+ Orientacion de las listas a objetos
     //+ He eliminado el anterior metodo y añadido este
-    public static ArrayList<Camarero> buscarTodos() throws ClassNotFoundException, SQLException  {
+    public static ArrayList<Camarero> listarCamareros() throws ClassNotFoundException, SQLException  {
         
         
         Connection conexion = ConexionRestaurante.conexionRestaurante();

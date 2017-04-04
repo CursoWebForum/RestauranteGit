@@ -5,7 +5,7 @@
  */
 package dao.admistrador.restaurante;
 
-import Utilidades.ConexionRestaurante;
+import com.restaurante.utilidades.ConexionRestaurante;
 import static dao.camarero.restaurante.DaoCamarero.insertarCamarero;
 import entidades.Administrador;
 import entidades.Camarero;

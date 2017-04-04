@@ -5,8 +5,8 @@
  */
 package controladoresServlet;
 
-import Utilidades.ConexionRestaurante;
-import Utilidades.VerificarLogin;
+import com.restaurante.utilidades.ConexionRestaurante;
+import com.restaurante.utilidades.VerificarLogin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Utilidades;
+package com.restaurante.utilidades;
 
 /**
  *
@@ -14,7 +14,7 @@ public class ExcepcionesBD extends RuntimeException {
     public ExcepcionesBD() {
         super();
     }
-
+//constructor con la causa
     public ExcepcionesBD(String mensaje, Throwable causa) {
         super(mensaje, causa);
     }

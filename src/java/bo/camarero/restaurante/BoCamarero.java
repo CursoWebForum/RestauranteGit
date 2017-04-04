@@ -10,6 +10,8 @@ import static dao.camarero.restaurante.DaoCamarero.insertarCamarero;
 import entidades.Camarero;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,7 +29,7 @@ public class BoCamarero {
     camarero.setApellido(request.getParameter("apellido"));
     camarero.setIdCamarero(Integer.parseInt(request.getParameter("idcamarero")));
     DaoCamarero.actualizarCamarero(camarero.getNombre(),camarero.getApellido(),camarero.getIdCamarero());
-    //pendiente devolver a la vista  para mostrar el resultado 
+    
     
     }
     
@@ -39,18 +41,30 @@ public class BoCamarero {
     camarero.setApellido(request.getParameter("apellido"));
     DaoCamarero.insertarCamarero(camarero.getIdCamarero(), camarero.getNombre(), camarero.getApellido());
     
-    //Desde el controlador llamamos a la vista
-    response.sendRedirect("/RestauranteGit/mostrarServletCamarero");
+ 
      
 
 }
     public static void procesarPeticionBorrarCamareroById(HttpServletRequest request,HttpServletResponse response) throws ClassNotFoundException, SQLException, IOException{
         Camarero camarero=new Camarero();
         camarero.setIdCamarero(Integer.parseInt(request.getParameter("idcamarero")));
-        //llamamos al DAO y a su metodo
         DaoCamarero.borrarCamareroId(camarero.getIdCamarero());
-        //Desde el controlador dirigimos a la vista 
-        //Pasamos la redirección del controlador a la vista
-        //response.sendRedirect("/RestauranteGit/mostrarServletCamarero");
+       
+    }
+    
+    public static void procesarPeticiónListarCamarero(HttpServletRequest request,HttpServletResponse response){
+        
+        try {
+            Camarero camarero=new Camarero();
+            DaoCamarero.listarCamareros();
+            //cambiar los loooger
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BoCamarero.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BoCamarero.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
     }
 }

@@ -5,7 +5,7 @@
  */
 package controladoresServlet;
 
-import Utilidades.ConexionRestaurante;
+import com.restaurante.utilidades.ConexionRestaurante;
 import bo.cocinero.restaurante.BoCocinero;
 import dao.cocinero.restaurante.DaoCocinero;
 import java.io.IOException;

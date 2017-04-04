@@ -1,6 +1,6 @@
 package controladoresServlet;
 
-import Utilidades.ConexionRestaurante;
+import com.restaurante.utilidades.ConexionRestaurante;
 import bo.camarero.restaurante.BoCamarero;
 import dao.camarero.restaurante.DaoCamarero;
 import java.io.IOException;
@@ -23,21 +23,19 @@ import org.apache.log4j.BasicConfigurator;
 @WebServlet (name="ControladorServletCamarero", urlPatterns = {"/controladorServletCamarero"})
 public class ControladorServletCamarero extends HttpServlet {
 
+    //Nuestro Controlador llama a la vista
+    private static final Logger logCamarero = Logger.getLogger(ControladorServletCamarero.class.getPackage().getName());
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         
-        //Ejemplo Nuestro configurador básico
-        // BasicConfigurator.configure();
-//org.apache.log4j.Logger logs = org.apache.log4j.Logger.getLogger("Logger de Ejemplo");
-		
-		
-       
+         
         HttpSession misession = (HttpSession) request.getSession();
-       // logs.info("Recupero la sesion");
+       
         boolean log = (boolean) misession.getAttribute("ok");
         String action = request.getParameter("action");
-        //logs.info("usuario registrado");
-// + nuevos action
+        logCamarero.info("usuario registrado");
+
         if (log == true) {
 
             //recupera el action del formulario
@@ -52,12 +50,20 @@ public class ControladorServletCamarero extends HttpServlet {
                 BoCamarero.procesarPeticionInsertarCamarero(request, response);
                
                
-                response.sendRedirect("/RestauranteGit/altas.htm");
+                response.sendRedirect("/mostrarCamarero.jsp");
             }
             
             if (action.contains("borrar")) {
                 BoCamarero.procesarPeticionBorrarCamareroById(request, response);
-                response.sendRedirect("/RestauranteGit/mostrarServletCamarero");
+                response.sendRedirect("/mostrarCamarero.jsp");
+            }
+            
+            if(action.contains("listar")){
+                
+                BoCamarero.procesarPeticiónListarCamarero(request, response);
+                
+                response.sendRedirect("/mostrarCamarero.jsp");
+                
             }
 
         }

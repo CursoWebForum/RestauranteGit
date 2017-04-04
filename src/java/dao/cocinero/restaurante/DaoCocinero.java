@@ -5,7 +5,7 @@
  */
 package dao.cocinero.restaurante;
 
-import Utilidades.ConexionRestaurante;
+import com.restaurante.utilidades.ConexionRestaurante;
 import entidades.Cocinero;
 import java.io.IOException;
 import java.sql.Connection;
