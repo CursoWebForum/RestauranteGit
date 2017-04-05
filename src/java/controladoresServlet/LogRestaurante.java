@@ -43,7 +43,7 @@ public class LogRestaurante extends HttpServlet {
 
             HttpSession sesion_login = request.getSession();
             
-            logRestaurante.debug("Sesion Creada: "+sesion_login.isNew());
+            
             
             sesion_login.setAttribute("login_usuario", user_login);
             sesion_login.setAttribute("login_password", pass_login);

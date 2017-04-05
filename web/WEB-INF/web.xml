@@ -4,39 +4,11 @@
     <!--pagina de error-->
     <error-page>
         <exception-type>java.lang.RuntimeException</exception-type>
-        <location>/error.jsp</location>
+        <location>/WEB-INF/error.jsp</location>
     </error-page>
     
    
-    <servlet>
-        <servlet-name>MostrarServletAdministrador</servlet-name>
-        <servlet-class>controladoresServlet.MostrarServletAdministrador</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>mostrarServletCamarero</servlet-name>
-        <servlet-class>controladoresServlet.mostrarServletCamarero</servlet-class>
-    </servlet>
-  
-    <servlet>
-        <servlet-name>mostrarServletCocinero</servlet-name>
-        <servlet-class>controladoresServlet.mostrarServletCocinero</servlet-class>
-    </servlet>
-   
-    <servlet-mapping>
-        <servlet-name>mostrarServletCamarero</servlet-name>
-        <url-pattern>/mostrarServletCamarero</url-pattern>
-    </servlet-mapping>
-   
-    <servlet-mapping>
-        <servlet-name>mostrarServletCocinero</servlet-name>
-        <url-pattern>/mostrarServletCocinero</url-pattern>
-    </servlet-mapping>
-   
-  
-    <servlet-mapping>
-        <servlet-name>MostrarServletAdministrador</servlet-name>
-        <url-pattern>/mostrarServletAdministrador</url-pattern>
-    </servlet-mapping>
+    
     
     <welcome-file-list>
         <welcome-file>login.html</welcome-file>

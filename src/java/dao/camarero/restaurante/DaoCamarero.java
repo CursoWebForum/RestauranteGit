@@ -34,28 +34,10 @@ public class DaoCamarero {
 			.getPackage().getName());
 
     
-    /* public static void insertarCamareroCopy(int idCamarero, String nombre, String apellido) throws ExcepcionesBD {
-
-        try {
-            Connection conexion = ConexionRestaurante.conexionRestaurante();
-            Statement sentencia = conexion.createStatement();
-            String consultaSQL = "insert into camarero (idcamarero,nombre,apellido) values ";
-            consultaSQL += "('" + idCamarero + "','" + nombre + "','" + apellido + "')";
-            int filas = sentencia.executeUpdate(consultaSQL);
-            System.out.println("Numero de filas insertadas: " + filas);
-            sentencia.close();
-            ConexionRestaurante.cerrarConexion();
-        } catch (ClassNotFoundException e) {
-            log.error("Clase no encontrada" + e.getMessage());
-            throw new ExcepcionesBD("Clase no encontrada");
-        } catch (SQLException e) {
-           log.error("Excepción de Sql", e.getCause());
-            throw new ExcepcionesBD("Se ha producido una excepción del tipo:" +e.getErrorCode());
-        }
-
-    }*/
+    
     public static void insertarCamarero(int idCamarero, String nombre, String apellido) throws ExcepcionesBD {
 
+       
         try {
             Connection conexion = ConexionRestaurante.conexionRestaurante();
             Statement sentencia = conexion.createStatement();
@@ -64,26 +46,35 @@ public class DaoCamarero {
             int filas = sentencia.executeUpdate(consultaSQL);
             log.info("Numero de Filas insertadas" + filas);
             sentencia.close();
-            ConexionRestaurante.cerrarConexion();
-        } catch (ClassNotFoundException e) {
-            log.error("Clase no encontrada" + e.getMessage());
-            throw new ExcepcionesBD("Clase no encontrada");
-        } catch (SQLException e) {
-            log.error("Excepción de Sql", e.getCause());
-            throw new ExcepcionesBD("Se ha producido una excepción del tipo:" +e.getErrorCode());
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoCamarero.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
 
     }
 
-    public static void actualizarCamarero(String nombre, String apellido, int idcamarero) throws ClassNotFoundException, SQLException {
+    public static void actualizarCamarero(String nombre, String apellido, int idcamarero){
 
-        Connection conexion = ConexionRestaurante.conexionRestaurante();
-        String sql = "update camarero SET nombre='"+nombre+"',apellido='"+apellido+"' WHERE idcamarero='"+idcamarero+"'";
-        Statement actualizar = conexion.prepareStatement(sql);
-        int filas = actualizar.executeUpdate(sql);
-        System.out.println("N filas afectadas " + filas);
-        actualizar.close();
-        conexion.close();
+        try {
+            Connection conexion = ConexionRestaurante.conexionRestaurante();
+            String sql = "update camarero SET nombre='"+nombre+"',apellido='"+apellido+"' WHERE idcamarero='"+idcamarero+"'";
+            Statement actualizar = conexion.prepareStatement(sql);
+            int filas = actualizar.executeUpdate(sql);
+            conexion.commit();
+            log.info("Numero de Filas insertadas" + filas);
+            
+            if(filas ==0){
+                conexion.rollback();
+            }
+            
+            actualizar.close();
+            conexion.close();
+        } catch (SQLException ex) {
+            
+            throw new ExcepcionesBD("Revisa la sintaxis SQl", ex.getCause());
+           
+        }
+        
 
     }
 
@@ -105,7 +96,7 @@ public class DaoCamarero {
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            throw new ExcepcionesBD("error en la insercion de datos");
+            throw new ExcepcionesBD("Se ha producido un error");
         }
         return lista_camareros;
     }

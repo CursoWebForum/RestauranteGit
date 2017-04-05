@@ -18,7 +18,7 @@ public class ConexionRestaurante {
         String classname = "com.mysql.jdbc.Driver";
         String url = "jdbc:mysql://localhost/resturante";
         String user = "root";
-        String password = "rooot";
+        String password = "root";
         try {
 
             Class.forName(classname);

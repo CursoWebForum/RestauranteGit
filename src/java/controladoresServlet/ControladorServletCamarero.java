@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.log4j.BasicConfigurator;
+
 
 @WebServlet (name="ControladorServletCamarero", urlPatterns = {"/controladorServletCamarero"})
 public class ControladorServletCamarero extends HttpServlet {
@@ -34,7 +34,7 @@ public class ControladorServletCamarero extends HttpServlet {
        
         boolean log = (boolean) misession.getAttribute("ok");
         String action = request.getParameter("action");
-        logCamarero.info("usuario registrado");
+        
 
         if (log == true) {
 
@@ -42,27 +42,27 @@ public class ControladorServletCamarero extends HttpServlet {
             if (action.contains("actualizar")) {
 
                 BoCamarero.procesarPeticionUpdateCamareroById(request, response);
-                response.sendRedirect("/mostrarCamarero.jsp");
-                 /*RequestDispatcher rs=request.getRequestDispatcher("mostrarCamarero.jsp");
-                 rs.forward(request, response);*/
+                //response.sendRedirect("/RestauranteGit/mostrarServletCamarero");
+                 RequestDispatcher rs=request.getRequestDispatcher("/mostrarServletCamarero");
+                 rs.forward(request, response);
             }
             if (action.contains("insertar")) {
                 BoCamarero.procesarPeticionInsertarCamarero(request, response);
                
-               
-                response.sendRedirect("/mostrarCamarero.jsp");
+                RequestDispatcher rs=request.getRequestDispatcher("/mostrarServletCamarero");
+                rs.forward(request, response);
             }
             
             if (action.contains("borrar")) {
                 BoCamarero.procesarPeticionBorrarCamareroById(request, response);
-                response.sendRedirect("/mostrarCamarero.jsp");
+                response.sendRedirect("/RestauranteGit/mostrarServletCamarero");
             }
             
             if(action.contains("listar")){
                 
                 BoCamarero.procesarPeticiónListarCamarero(request, response);
                 
-                response.sendRedirect("/mostrarCamarero.jsp");
+                response.sendRedirect("/RestauranteGit/mostrarServletCamarero");
                 
             }
 
@@ -91,9 +91,9 @@ public class ControladorServletCamarero extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ControladorServletCamarero.class.getName()).log(Level.SEVERE, null, ex);
+            
         } catch (SQLException ex) {
-            Logger.getLogger(ControladorServletCamarero.class.getName()).log(Level.SEVERE, null, ex);
+           
         }
     }
 
