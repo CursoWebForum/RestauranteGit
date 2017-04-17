@@ -6,10 +6,25 @@
         <exception-type>java.lang.RuntimeException</exception-type>
         <location>/WEB-INF/error.jsp</location>
     </error-page>
-    
-   
-    
-    
+    <!--declaración de parametros del contexto-->
+    <context-param>
+        <description>Clase del jar</description>
+        <param-name>classname</param-name>
+        <param-value>com.mysql.jdbc.Driver</param-value>
+    </context-param>
+    <context-param>
+        <description>cadena de conexion</description>
+        <param-name>url</param-name>
+        <param-value>jdbc:mysql://localhost/resturante</param-value>
+    </context-param>
+    <context-param>
+        <param-name>user</param-name>
+        <param-value>root</param-value>
+    </context-param>
+    <context-param>
+        <param-name>password</param-name>
+        <param-value>root</param-value>
+    </context-param>
     <welcome-file-list>
         <welcome-file>login.html</welcome-file>
     </welcome-file-list>
