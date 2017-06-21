@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+var pepe;
 function valida(f) {
-  var ok = true;
-  var msg = "Debes escribir contenido en los campos:\n";
+  let pepe;
+  let ok = true;
+  let msg = "Debes escribir contenido en los campos:\n";
   if(f.elements[0].value === "")
   {
     msg += "- Marca 1\n";
